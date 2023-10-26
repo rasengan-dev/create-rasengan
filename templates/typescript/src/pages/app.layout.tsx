@@ -1,19 +1,17 @@
 // @ts-ignore
-import React from "react"
-// @ts-ignore
-import { Outlet, LayoutComponent, Route } from "rasengan/core"
+import React from "react";
+import { LayoutComponent, Outlet, defineRouteLayout } from "rasengan";
 
-@Route({
-  path: "/",
-  exact: true
-})
-export default class AppLayout extends LayoutComponent {
-  render(): React.ReactNode {
+class AppLayout extends LayoutComponent {
+  render() {
     return (
-      <div>
-        <h1>App Layout</h1>
+      <React.Fragment>
         <Outlet />
-      </div>
-    )
+      </React.Fragment>
+    );
   }
 }
+
+export default defineRouteLayout({
+  path: "/",
+})(AppLayout);

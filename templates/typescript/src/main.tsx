@@ -1,8 +1,7 @@
-// @ts-ignore
-import { type AppProps } from 'rasengan/core';
-import AppRouter from "./pages/app.router.ts";
+import "./pages/style.css";
+import { type AppProps } from "rasengan";
+import AppRouter from "./pages/app.router";
 
 export default function App({ Component }: AppProps) {
-  // @ts-ignore 
-  return <Component router={AppRouter} />
+  return <Component router={AppRouter} />;
 }

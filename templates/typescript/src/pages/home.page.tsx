@@ -1,29 +1,129 @@
-// @ts-ignore
-import React, { useState } from "react";
-// @ts-ignore
-import { PageComponent, Route, createRoute } from "rasengan/core";
+import { PageComponent, defineRoutePage } from "rasengan";
+import { useEffect, useState } from "react";
 
-@Route({ path: "/", exact: true, title: "Home", description: "Home page" })
-export default class Home extends PageComponent {
+class Home extends PageComponent {
   render() {
-    const [count, setCount] = useState(0);
+    // Local state
+    const [chrono, setChrono] = useState(60);
+    const [isRunning, setIsRunning] = useState(false);
+
+    // Effects
+    useEffect(() => {
+      if (isRunning) {
+        const interval = setInterval(() => {
+          setChrono((chrono) => chrono - 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+      }
+    }, [isRunning]);
+
+    useEffect(() => {
+      if (chrono < 0) {
+        handleReset();
+      }
+    }, [chrono]);
+
+    // Handlers
+    const handleReset = () => {
+      setChrono(60);
+      setIsRunning(false);
+    };
+
+    const handleStart = () => {
+      setIsRunning(true);
+    };
+
+    const handleStop = () => {
+      setIsRunning(false);
+    };
 
     return (
-      <div>
-        <h1>Home</h1>
-        <p>Home page content</p>
+      <section className="app">
+        <div>
+          <h1>
+            Welcome to <span>Rasengan.js</span>
+          </h1>
+        </div>
 
-        <p>Count: {count}</p>
-        <button onClick={() => setCount(count + 1)}>Increment</button>
-      </div>
+        <section className="counter_container">
+          <h2>Chrono</h2>
+
+          <div className="counter_value">
+            <span>{chrono}</span>
+          </div>
+
+          <div className="counter_buttons">
+            <button onClick={handleReset}>Reset</button>
+
+            {isRunning ? (
+              <button onClick={handleStop}>Stop</button>
+            ) : (
+              <button onClick={handleStart}>Start</button>
+            )}
+          </div>
+        </section>
+
+        <div className="instruction">
+          <p>
+            Update the <code>src/pages/home.page.tsx</code> file and save to
+            reload.
+          </p>
+        </div>
+
+        <hr />
+
+        <h2>Learn more</h2>
+
+        <section className="links">
+          <div className="block">
+            <div className="link">
+              <span>Documentation</span>
+
+              <span>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo,
+                tempore.
+              </span>
+            </div>
+
+            <div className="link">
+              <span>Examples</span>
+
+              <span>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo,
+                tempore.
+              </span>
+            </div>
+          </div>
+
+          <div className="block">
+            <div className="link">
+              <span>Github</span>
+
+              <span>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo,
+                tempore.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <div className="powered">
+          <p>
+            Powered by{" "}
+            <a href="https://rasengan.com" target="_blanc">
+              Rasengan
+            </a>
+          </p>
+        </div>
+      </section>
     );
   }
 }
 
 // Js version
-const HomeRoute = createRoute({
+export default defineRoutePage({
   path: "/",
-  exact: true,
   title: "Home",
-  description: "Home page"
+  description: "Home page",
 })(Home);
