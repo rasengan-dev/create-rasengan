@@ -1,11 +1,11 @@
 {
-  "name": "rasengan-cli",
+  "name": "create-rasengan-app",
   "version": "1.0.0",
   "main": "/dist/main.js",
   "type": "module",
   "license": "MIT",
   "bin": {
-    "rasengan": "./dist/main.js"
+    "create-rasengan-app": "./dist/main.js"
   },
   "scripts": {
     "build": "tsc"

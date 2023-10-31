@@ -1,7 +1,6 @@
 import "./pages/index.css";
-import { type AppProps } from "rasengan";
 import AppRouter from "./pages/app.router";
 
-export default function App({ Component }: AppProps) {
+export default function App({ Component }) {
   return <Component router={AppRouter} />;
 }

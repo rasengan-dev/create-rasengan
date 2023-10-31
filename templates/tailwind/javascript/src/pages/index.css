@@ -1,0 +1,25 @@
+/* Load poppins and roboto font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap");
+
+
+/**
+ * These directives tell Tailwind to include the base styles for the project,
+ * any components that are used, and any utilities that are used.
+ * So don't remove them!
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+
+  /* Apply background color */
+  @apply bg-secondary;
+}

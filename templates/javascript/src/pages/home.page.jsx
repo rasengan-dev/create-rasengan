@@ -4,8 +4,8 @@ import { PageComponent, defineRoutePage } from "rasengan";
 class Home extends PageComponent {
   render() {
     // Local state
-    const [chrono, setChrono] = useState<number>(60);
-    const [isRunning, setIsRunning] = useState<boolean>(false);
+    const [chrono, setChrono] = useState(60);
+    const [isRunning, setIsRunning] = useState(false);
 
     // Effects
     useEffect(() => {
@@ -66,7 +66,7 @@ class Home extends PageComponent {
 
         <div className="instruction">
           <p>
-            Update the <code>src/pages/home.page.tsx</code> file and save to
+            Update the <code>src/pages/home.page.jsx</code> file and save to
             reload.
           </p>
         </div>
