@@ -45,11 +45,11 @@ const spinner = (text: string) =>
 const program = new Command();
 
 program
-  .name(chalk.blue("create-rasengan-app"))
+  .name(chalk.blue("create-rasengan"))
   .version("1.0.0", "-v, --version", "Output the current version number")
   .description(
     `${chalk.blue(
-      "Create Rasengan App"
+      "Create Rasengan"
     )} is a CLI tool for creating your frontend projects built using ${chalk.bold.cyan(
       "Rasengan.js"
     )} Framework.`
@@ -59,6 +59,9 @@ program
   .command("new [project-name]")
   .description("Create a new project")
   .action(async (projectName, options) => {
+    // Showing the welcome message
+    console.log(`\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`);
+
     // Getting the current directory
     const currentDirectory = process.cwd();
 
@@ -109,7 +112,14 @@ program
       await fs.readdir(projectPath);
 
       // Returning if the project already exists
-      console.error("Project already exists!");
+      console.log(
+        `It seems like a project with the name ${chalk.bold.blue(
+          projectName
+        )} already exists!\n`
+      );
+      console.log(`
+        Try using a different project name or delete the existing project.
+      `)
     } catch (err) {
       // Ask for the language
       let languageName = "";
@@ -273,7 +283,9 @@ program
 
         await new Promise((resolve) =>
           setTimeout(() => {
-            createSpinner.succeed(chalk.green("Project created successfully!"));
+            createSpinner.succeed(
+              chalk.green("\nProject created successfully!")
+            );
 
             resolve("");
           }, 2000)
@@ -305,7 +317,7 @@ program
 
         console.log("");
         console.log(
-          `For more information, visit ${chalk.blue("https://rasenganjs.org")}`
+          `For more information, visit ${chalk.blue("https://rasenganjs.dev")}`
         );
       });
     }
