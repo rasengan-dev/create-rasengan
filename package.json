@@ -1,14 +1,26 @@
 {
-  "name": "create-rasengan-app",
-  "version": "1.0.0",
+  "name": "create-rasengan",
+  "version": "1.0.2-beta-1",
   "main": "/dist/main.js",
-  "type": "module",
+  "type": "module","author": {
+    "name": "dilane3",
+    "email": "komboudilane125@gmail.com",
+    "url": "https://dilane3.com",
+    "twitter": "https://twitter.com/dilanekombou",
+    "github": "https://github.com/dilane3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rasengan/rasengan",
+    "issues": "https://github.com/rasengan/rasengan/issues"
+  },
   "license": "MIT",
   "bin": {
-    "create-rasengan-app": "./dist/main.js"
+    "create-rasengan": "./dist/main.js"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "deploy": "npm publish --access public"
   },
   "dependencies": {
     "chalk": "^5.3.0",

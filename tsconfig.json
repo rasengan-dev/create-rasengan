@@ -11,6 +11,6 @@
     "noImplicitThis": true,
     "noImplicitAny": true
   },
-  "include": ["main.ts", "utils/**/*", "constants/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "templates"]
 }

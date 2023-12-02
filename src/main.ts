@@ -56,7 +56,7 @@ program
   );
 
 program
-  .command("create [project-name]")
+  .command("new [project-name]")
   .description("Create a new project")
   .action(async (projectName, options) => {
     // Getting the current directory

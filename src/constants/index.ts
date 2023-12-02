@@ -1,7 +1,7 @@
 /**
  * Template list
  */
-export const Templates = ["blank", "tailwind"];
+export const Templates = ["blank"];
 
 /**
  * Language list

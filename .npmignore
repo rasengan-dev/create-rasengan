@@ -1,6 +1,5 @@
 node_modules
-constants
-utils
+src
 
 yarn-error.log
 package-lock.json
