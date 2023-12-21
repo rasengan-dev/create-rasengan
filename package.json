@@ -2,7 +2,8 @@
   "name": "create-rasengan",
   "version": "1.0.2-beta-2",
   "main": "/dist/main.js",
-  "type": "module","author": {
+  "type": "module",
+  "author": {
     "name": "dilane3",
     "email": "komboudilane125@gmail.com",
     "url": "https://dilane3.com",
