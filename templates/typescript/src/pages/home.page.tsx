@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PageComponent, defineRoutePage } from "rasengan";
 
 class Home extends PageComponent {

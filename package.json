@@ -21,7 +21,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "deploy": "npm publish --access public"
+    "deploy": "npm publish --access public",
+    "pack": "npm pack --pack-destination ./../packages/create-rasengan/"
   },
   "dependencies": {
     "chalk": "^5.3.0",

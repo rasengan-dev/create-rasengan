@@ -1,4 +1,5 @@
 import "./pages/index.css";
+import React from "react";
 import AppRouter from "./pages/app.router";
 
 export default function App({ Component }) {
