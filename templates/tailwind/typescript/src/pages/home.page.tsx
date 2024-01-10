@@ -1,148 +1,86 @@
-import { useEffect, useState } from "react";
-import { PageComponent, defineRoutePage } from "rasengan";
+import { PageComponent, defineRoutePage, Link } from "rasengan";
 
 class Home extends PageComponent {
   render() {
-    // Local state
-    const [chrono, setChrono] = useState<number>(60);
-    const [isRunning, setIsRunning] = useState<boolean>(false);
-
-    // Effects
-    useEffect(() => {
-      if (isRunning) {
-        const interval = setInterval(() => {
-          setChrono((chrono) => chrono - 1);
-        }, 1000);
-
-        return () => clearInterval(interval);
-      }
-    }, [isRunning]);
-
-    useEffect(() => {
-      if (chrono < 0) {
-        handleReset();
-      }
-    }, [chrono]);
-
-    // Handlers
-    const handleReset = () => {
-      setChrono(60);
-      setIsRunning(false);
-    };
-
-    const handleStart = () => {
-      setIsRunning(true);
-    };
-
-    const handleStop = () => {
-      setIsRunning(false);
-    };
-
     return (
-      <section className="w-full h-full flex flex-col items-center mt-20">
-        <div>
-          <h1 className="text-[2rem] md:text-[3rem] text-white font-poppins font-bold text-center">
-            Welcome to <span className="text-primary">Rasengan.js</span>
+      <section className="w-full h-full bg-white flex flex-col items-center py-8 px-[20px] md:px-[50px] xl:px-[200px]">
+        <header className="flex justify-end items-center w-full">
+          <div className="flex items-center gap-2">
+            <span>Powered by</span>
+            <Link to="https://rasengan.dev" target="_blank">
+              <span className="text-primary font-bold">Rasengan</span>
+            </Link>
+          </div>
+        </header>
+
+        <div className="flex flex-col items-center mt-4">
+          <h1 className="font-black text-[3rem] md:text-[4rem] text-center">
+            Welcome to <span className="text-primary">Rasengan</span>
           </h1>
-        </div>
-
-        <section className="w-[18.75rem] bg-[#fff] rounded-md flex flex-col items-center p-4 mt-8">
-          <h2 className="text-2xl font-semibold font-roboto">Chrono</h2>
-
-          <div className="">
-            <span className="text-[3rem] font-bold text-primary">{chrono}</span>
-          </div>
-
-          <div className="w-full gap-4 flex flex-row justify-between">
-            <button
-              onClick={handleReset}
-              className="w-[50%] rounded-md bg-transparent border-2 border-primary py-2 text-primary font-bold font-roboto transition-all"
-            >
-              Reset
-            </button>
-
-            {isRunning ? (
-              <button
-                onClick={handleStop}
-                className="w-[50%] rounded-md bg-primary py-2 text-[#fff] font-bold font-roboto transition-all"
-              >
-                Stop
-              </button>
-            ) : (
-              <button
-                onClick={handleStart}
-                className="w-[50%] rounded-md bg-primary py-2 text-[#fff] font-bold font-roboto transition-all"
-              >
-                Start
-              </button>
-            )}
-          </div>
-        </section>
-
-        <div className="mt-8 text-white font-roboto px-2">
-          <p className="text-center">
-            Update the{" "}
-            <code className="text-primary mx-2">src/pages/home.page.tsx</code>{" "}
-            file and save to reload.
+          <p className="text-lg mt-4">
+            To get started, edit the file{" "}
+            <code className="text-sm ml-2 font-medium">
+              src/pages/home.page.tsx
+            </code>
           </p>
         </div>
 
-        <hr className="w-full md:w-[800px] mt-10" />
-
-        <h2 className="text-white mt-8 text-[1.8rem] font-poppins font-bold mb-8">
-          Learn more
-        </h2>
-
-        <section className="w-full md:w-[800px] flex flex-col md:flex-row gap-4 md:gap-8 px-4">
-          <div className="flex flex-col gap-4 md:gap-8">
-            <div className="border-2 border-white rounded-md p-4 flex flex-col">
-              <span className="text-primary text-xl font-semibold mb-2 font-poppins">
-                Documentation
-              </span>
-
-              <span className="text-white font-roboto">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                tempore.
-              </span>
-            </div>
-
-            <div className="border-2 border-white rounded-md p-4 flex flex-col">
-              <span className="text-primary text-xl font-semibold mb-2 font-poppins">
-                Examples
-              </span>
-
-              <span className="text-white font-roboto">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                tempore.
-              </span>
-            </div>
-          </div>
-
-          <div className="block">
-            <div className="border-2 border-white rounded-md p-4 flex flex-col">
-              <span className="text-primary text-xl font-semibold mb-2 font-poppins">
-                Github
-              </span>
-
-              <span className="text-white font-roboto">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                tempore.
-              </span>
-            </div>
-          </div>
-        </section>
-
-        <div className="w-full px-4 mt-8 mb-20 flex justify-end md:fixed md:bottom-8 md:right-8">
-          <p className="text-white font-roboto">
-            Powered by{" "}
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
+            <h2 className="text-lg font-bold">Documentation</h2>
+            <p className="mt-2">
+              Find in-depth information about Rasengan features and API.
+            </p>
             <a
-              href="https://rasengan.com"
-              target="_blanc"
-              className="font-poppins font-bold text-primary"
+              href="https://rasengan.dev/docs"
+              target="_blank"
+              className="mt-4 text-primary font-bold"
             >
-              Rasengan
+              Read the Docs
             </a>
-          </p>
+          </div>
+
+          <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
+            <h2 className="text-lg font-bold">Learn</h2>
+            <p className="mt-2">
+              Learn about Rasengan in an interactive course with quizzes!
+            </p>
+            <a
+              href="https://rasengan.dev/learn"
+              target="_blank"
+              className="mt-4 text-primary font-bold"
+            >
+              Take the Course
+            </a>
+          </div>
+
+          <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
+            <h2 className="text-lg font-bold">Examples</h2>
+            <p className="mt-2">
+              Discover and deploy boilerplate example Rasengan projects.
+            </p>
+            <a
+              href="https://rasengan.dev/examples"
+              target="_blank"
+              className="mt-4 text-primary font-bold"
+            >
+              View Examples
+            </a>
+          </div>
+
+          <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
+            <h2 className="text-lg font-bold">Community</h2>
+            <p className="mt-2">
+              Join an active community of Rasengan users on Discord.
+            </p>
+            <a
+              href="https://rasengan.dev/discord"
+              target="_blank"
+              className="mt-4 text-primary font-bold"
+            >
+              Join Discord
+            </a>
+          </div>
         </div>
       </section>
     );
