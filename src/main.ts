@@ -153,17 +153,17 @@ program
       // Prepare question for the state manager
       let stateManager = "";
 
-      // Prepare the question for the state manager
-      const stateManagerQuestion = {
-        type: "list",
-        name: "stateManager",
-        message: "Select a state manager:",
-        choices: StateManagers,
-      };
+      // // Prepare the question for the state manager
+      // const stateManagerQuestion = {
+      //   type: "list",
+      //   name: "stateManager",
+      //   message: "Select a state manager:",
+      //   choices: StateManagers,
+      // };
 
-      const stateManagerAnswer = await inquirer.prompt([stateManagerQuestion]);
+      // const stateManagerAnswer = await inquirer.prompt([stateManagerQuestion]);
 
-      stateManager = stateManagerAnswer.stateManager;
+      // stateManager = stateManagerAnswer.stateManager;
 
       // Handling all answers
       const templatePath = path.join(
@@ -317,7 +317,7 @@ program
 
         console.log("");
         console.log(
-          `For more information, visit ${chalk.blue("https://rasenganjs.dev")}`
+          `For more information, visit ${chalk.blue("https://rasengan.dev/docs")}`
         );
       });
     }
