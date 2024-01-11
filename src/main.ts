@@ -283,8 +283,9 @@ program
 
         await new Promise((resolve) =>
           setTimeout(() => {
+            console.log("\n");
             createSpinner.succeed(
-              chalk.green("\nProject created successfully!")
+              chalk.green("Project created successfully!")
             );
 
             resolve("");
