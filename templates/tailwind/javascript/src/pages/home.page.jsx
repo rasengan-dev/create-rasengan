@@ -3,18 +3,18 @@ import { PageComponent, defineRoutePage, Link } from "rasengan";
 class Home extends PageComponent {
   render() {
     return (
-      <section className="w-full h-full bg-white flex flex-col items-center py-8 px-[20px] md:px-[50px] xl:px-[200px]">
+      <section className="w-full h-full bg-white flex flex-col items-center py-8 px-[20px] md:px-[50px] xl:px-[200px] font-comfortaa">
         <header className="flex justify-end items-center w-full">
           <div className="flex items-center gap-2">
             <span>Powered by</span>
             <Link to="https://rasengan.dev" target="_blank">
-              <span className="text-primary font-bold">Rasengan</span>
+              <span className="text-primary font-urbanist">Rasengan</span>
             </Link>
           </div>
         </header>
 
         <div className="flex flex-col items-center mt-4">
-          <h1 className="font-black text-[3rem] md:text-[4rem] text-center">
+          <h1 className="font-black text-[3rem] md:text-[4rem] text-center font-urbanist">
             Welcome to <span className="text-primary">Rasengan</span>
           </h1>
           <p className="text-lg mt-4">
@@ -27,7 +27,7 @@ class Home extends PageComponent {
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
-            <h2 className="text-lg font-bold">Documentation</h2>
+            <h2 className="text-xl font-urbanist">Documentation</h2>
             <p className="mt-2">
               Find in-depth information about Rasengan features and API.
             </p>
@@ -41,7 +41,7 @@ class Home extends PageComponent {
           </div>
 
           <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
-            <h2 className="text-lg font-bold">Learn</h2>
+            <h2 className="text-xl font-urbanist">Learn</h2>
             <p className="mt-2">
               Learn about Rasengan in an interactive course with quizzes!
             </p>
@@ -55,7 +55,7 @@ class Home extends PageComponent {
           </div>
 
           <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
-            <h2 className="text-lg font-bold">Examples</h2>
+            <h2 className="text-xl font-urbanist">Examples</h2>
             <p className="mt-2">
               Discover and deploy boilerplate example Rasengan projects.
             </p>
@@ -69,7 +69,7 @@ class Home extends PageComponent {
           </div>
 
           <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
-            <h2 className="text-lg font-bold">Community</h2>
+            <h2 className="text-xl font-urbanist">Community</h2>
             <p className="mt-2">
               Join an active community of Rasengan users on Discord.
             </p>
