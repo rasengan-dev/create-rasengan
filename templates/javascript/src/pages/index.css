@@ -1,16 +1,12 @@
-/* Load poppins and roboto font */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap");
+/* Load Urbanist and Comfortaa font */
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&family=Urbanist:wght@700&display=swap");
 
 :root {
-  background-color: #fff;
-  color: #333;
-  font-size: 16px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
+  font-family: var(--font-mono);
+
+  /* Fonts */
+  --font-sans: "Urbanist", sans-serif;
+  --font-mono: "Comfortaa", monospace;
 
   /* Colors */
   --primary: #2a7fff;
@@ -19,15 +15,10 @@
 body,
 html {
   box-sizing: border-box;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
   width: 100vw;
   min-height: 100vh;
-}
-
-a {
-  text-decoration: none;
 }
 
 /* Styles to be applied to the welcome page */
@@ -35,7 +26,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(100% - 40px);
+  width: 100%;
   height: 100%;
   background-color: #fff;
   padding: 2rem 20px;
@@ -57,20 +48,21 @@ a {
 .header .logo-text {
   font-weight: 600;
   color: var(--primary);
+  font-family: var(--font-sans);
 }
 
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .hero .title {
   font-weight: 600;
   font-size: 3rem;
   text-align: center;
-  margin: 0;
+  font-family: var(--font-sans);
 }
 
 .hero .title span {
@@ -83,7 +75,6 @@ a {
   line-height: 1.75rem /* 28px */;
   text-align: center;
   margin-top: 1rem;
-  font-family: "Roboto", sans-serif;
 }
 
 .hero .subtitle code {
@@ -115,26 +106,24 @@ a {
   font-weight: 600;
   font-size: 1.125rem /* 18px */;
   line-height: 1.75rem /* 28px */;
-  margin: 0;
+  font-family: var(--font-sans);
 }
 
 .card p {
   margin-top: 0.5rem;
-  font-family: "Roboto", sans-serif;
-  margin: 10px 0 0 0;
 }
 
 .card a {
   margin-top: 0.5rem;
   color: var(--primary);
   font-weight: 600;
-  font-family: "Roboto", sans-serif;
 }
+
+/* mt-4 text-primary font-bold */
 
 @media screen and (min-width: 768px) {
   .main {
     padding: 2rem 50px;
-    width: calc(100% - 100px);
   }
 
   .hero .title {
@@ -149,7 +138,6 @@ a {
 @media screen and (min-width: 1280px) {
   .main {
     padding: 2rem 200px;
-    width: calc(100% - 400px);
   }
 
   .card {
