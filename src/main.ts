@@ -56,7 +56,7 @@ program
   );
 
 program
-  .command("new [project-name]")
+  .command("[project-name]")
   .description("Create a new project")
   .action(async (projectName, options) => {
     // Showing the welcome message
@@ -151,7 +151,7 @@ program
       templateName = templateAnswer.template;
 
       // Prepare question for the state manager
-      let stateManager = "";
+      // let stateManager = "";
 
       // // Prepare the question for the state manager
       // const stateManagerQuestion = {
