@@ -30,7 +30,12 @@ import ora from "ora";
 import fs from "node:fs/promises";
 import path from "node:path";
 import ncp from "ncp";
-import { Languages, StateManagers, Templates } from "./constants/index.js";
+import {
+  Languages,
+  StateManagers,
+  Templates,
+  Versions,
+} from "./constants/index.js";
 import __dirname from "./utils/dirname.js";
 import inquirer from "inquirer";
 
@@ -56,11 +61,13 @@ program
   );
 
 program
-  .command("[project-name]")
+  .command("new [project-name]")
   .description("Create a new project")
   .action(async (projectName, options) => {
     // Showing the welcome message
-    console.log(`\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`);
+    console.log(
+      `\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`
+    );
 
     // Getting the current directory
     const currentDirectory = process.cwd();
@@ -119,8 +126,36 @@ program
       );
       console.log(`
         Try using a different project name or delete the existing project.
-      `)
+      `);
     } catch (err) {
+      // Ask for the version
+      let versionName = "";
+
+      // Check if there is a stable version
+      if (Versions.stable.length > 0) {
+        // Prepare the question for the version
+        const versionQuestion = {
+          type: "list",
+          name: "version",
+          message: "Select a version:",
+          choices: [...Versions.stable, ...Versions.beta],
+        };
+
+        const versionAnswer = await inquirer.prompt([versionQuestion]);
+        versionName = versionAnswer.version;
+      } else {
+        // Prepare the question for the version
+        const versionQuestion = {
+          type: "list",
+          name: "version",
+          message: "Select a version:",
+          choices: Versions.beta,
+        };
+
+        const versionAnswer = await inquirer.prompt([versionQuestion]);
+        versionName = versionAnswer.version;
+      }
+
       // Ask for the language
       let languageName = "";
 
@@ -214,7 +249,10 @@ program
         const parsedPackageJson = JSON.parse(packageJson);
 
         // Setting the project name
-        parsedPackageJson.name = projectName;
+        parsedPackageJson.name = nameOfProject;
+
+        // Setting the version
+        parsedPackageJson.dependencies["rasengan"] = versionName;
 
         // Writing the package.json file
         await fs.writeFile(
@@ -246,15 +284,15 @@ program
             path.join(projectPath, "postcss.config.js")
           );
 
-          // Copying the src/pages/index.css file
+          // Copying the src/styles/index.css file
           await fs.copyFile(
             path.join(
               __dirname,
               "../..",
               `templates/${templateName}/${languageName}`,
-              "src/pages/index.css"
+              "src/styles/index.css"
             ),
-            path.join(projectPath, "src/pages/index.css")
+            path.join(projectPath, "src/styles/index.css")
           );
 
           // Copying the src/pages/home.page.tsx file or src/pages/home.page.jsx
@@ -284,9 +322,7 @@ program
         await new Promise((resolve) =>
           setTimeout(() => {
             console.log("\n");
-            createSpinner.succeed(
-              chalk.green("Project created successfully!")
-            );
+            createSpinner.succeed(chalk.green("Project created successfully!"));
 
             resolve("");
           }, 2000)
@@ -318,7 +354,9 @@ program
 
         console.log("");
         console.log(
-          `For more information, visit ${chalk.blue("https://rasengan.dev/docs")}`
+          `For more information, visit ${chalk.blue(
+            "https://rasengan.dev/docs"
+          )}`
         );
       });
     }
