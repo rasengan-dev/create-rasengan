@@ -1,6 +1,6 @@
 {
   "name": "create-rasengan",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.4",
   "main": "/dist/main.js",
   "type": "module",
   "author": {
@@ -22,6 +22,7 @@
   "scripts": {
     "build": "tsc",
     "deploy": "npm publish --access public",
+    "deploy:beta": "npm run deploy --tag beta",
     "pack": "npm pack --pack-destination ./../packages/create-rasengan/"
   },
   "dependencies": {
