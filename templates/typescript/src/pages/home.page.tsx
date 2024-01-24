@@ -1,4 +1,3 @@
-import React from "react";
 import { PageComponent, defineRoutePage, Link } from "rasengan";
 
 class Home extends PageComponent {

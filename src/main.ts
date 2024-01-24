@@ -221,6 +221,18 @@ program
           return;
         }
 
+        // Copying .gitignore file
+        await fs.copyFile(
+          path.join(
+            templatePath,
+            "gitignore",
+          ),
+          path.join(projectPath, ".gitignore")
+        );
+
+        // Removing gitignore file from the project
+        await fs.rm(path.join(projectPath, "gitignore"));
+
         // Updating the package.json file
         let packageJson = null;
 
