@@ -51,18 +51,8 @@ const program = new Command();
 
 program
   .name(chalk.blue("create-rasengan"))
-  .version("1.0.0", "-v, --version", "Output the current version number")
-  .description(
-    `${chalk.blue(
-      "Create Rasengan"
-    )} is a CLI tool for creating your frontend projects built using ${chalk.bold.cyan(
-      "Rasengan.js"
-    )} Framework.`
-  );
-
-program
-  .command("new [project-name]")
-  .description("Create a new project")
+  .description(`\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`)
+  .arguments("[project-name]")
   .action(async (projectName, options) => {
     // Showing the welcome message
     console.log(
@@ -88,27 +78,31 @@ program
     }
 
     // Checking the format of the project name
-    if (!/^[a-z0-9_-]*$/i.test(nameOfProject)) {
-      console.error(
-        chalk.red(
-          "Project name can only include letters, numbers, underscores and hashes."
-        )
-      );
-      return;
-    }
+    if (nameOfProject === ".") {
+      nameOfProject = "";
+    } else {
+      if (!/^[a-z0-9_-]*$/i.test(nameOfProject)) {
+        console.error(
+          chalk.red(
+            "Project name can only include letters, numbers, underscores and hashes."
+          )
+        );
+        return;
+      }
 
-    if (nameOfProject !== nameOfProject.toLowerCase()) {
-      console.error(
-        chalk.red("Project name can only be in lowercase letters.")
-      );
-      return;
-    }
+      if (nameOfProject !== nameOfProject.toLowerCase()) {
+        console.error(
+          chalk.red("Project name can only be in lowercase letters.")
+        );
+        return;
+      }
 
-    if (nameOfProject.includes(" ")) {
-      console.error(
-        chalk.red("Project name can't include spaces. Please use dashes.")
-      );
-      return;
+      if (nameOfProject.includes(" ")) {
+        console.error(
+          chalk.red("Project name can't include spaces. Please use dashes.")
+        );
+        return;
+      }
     }
 
     // Checking if the project already exists
@@ -116,17 +110,25 @@ program
 
     // Checking if the project already exists
     try {
-      await fs.readdir(projectPath);
+      const dir = await fs.readdir(projectPath);
+      const projectName =
+        nameOfProject === ""
+          ? currentDirectory.split("/").pop()
+          : nameOfProject;
 
-      // Returning if the project already exists
-      console.log(
-        `It seems like a project with the name ${chalk.bold.blue(
-          projectName
-        )} already exists!\n`
-      );
-      console.log(`
-        Try using a different project name or delete the existing project.
-      `);
+      if (dir.length > 0) {
+        // Returning if the project already exists
+        console.log(
+          `
+            The folder with the name ${chalk.bold.blue(
+              projectName
+            )} is not empty!\n
+            Try using a different project name or delete the existing project.
+          `
+        );
+      } else {
+        throw new Error("Folder exist but empty");
+      }
     } catch (err) {
       // Ask for the version
       let versionName = "";
@@ -223,10 +225,7 @@ program
 
         // Copying .gitignore file
         await fs.copyFile(
-          path.join(
-            templatePath,
-            "gitignore",
-          ),
+          path.join(templatePath, "gitignore"),
           path.join(projectPath, ".gitignore")
         );
 
@@ -261,7 +260,9 @@ program
         const parsedPackageJson = JSON.parse(packageJson);
 
         // Setting the project name
-        parsedPackageJson.name = nameOfProject;
+        if (nameOfProject === "") {
+          parsedPackageJson.name = currentDirectory.split("/").pop();
+        } else parsedPackageJson.name = nameOfProject;
 
         // Setting the version
         parsedPackageJson.dependencies["rasengan"] = versionName;
@@ -347,17 +348,30 @@ program
         console.log("");
 
         // Display the next steps
-        console.log(`1. ${chalk.blue(`cd ${nameOfProject}`)}`);
-        console.log(
-          `2. ${chalk.blue("npm install")} or ${chalk.blue(
-            "yarn"
-          )} or ${chalk.blue("pnpm install")}`
-        );
-        console.log(
-          `3. ${chalk.blue("npm run dev")} or ${chalk.blue(
-            "yarn dev"
-          )} or ${chalk.blue("pnpm run dev")}`
-        );
+        if (nameOfProject) {
+          console.log(`1. ${chalk.blue(`cd ${nameOfProject}`)}`);
+          console.log(
+            `2. ${chalk.blue("npm install")} or ${chalk.blue(
+              "yarn"
+            )} or ${chalk.blue("pnpm install")}`
+          );
+          console.log(
+            `3. ${chalk.blue("npm run dev")} or ${chalk.blue(
+              "yarn dev"
+            )} or ${chalk.blue("pnpm run dev")}`
+          );
+        } else {
+          console.log(
+            `1. ${chalk.blue("npm install")} or ${chalk.blue(
+              "yarn"
+            )} or ${chalk.blue("pnpm install")}`
+          );
+          console.log(
+            `2. ${chalk.blue("npm run dev")} or ${chalk.blue(
+              "yarn dev"
+            )} or ${chalk.blue("pnpm run dev")}`
+          );
+        }
 
         console.log("");
 
