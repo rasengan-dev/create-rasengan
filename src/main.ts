@@ -13,15 +13,15 @@
  * You don't need to install this package manually before trying to use it in order to create your project.
  * You can use this package by running the following command:
  *
- * npx create-rasengan-app <project-name>
+ * npx create-rasengan <project-name>
  *
  * or
  *
- * yarn create rasengan-app <project-name>
+ * yarn create rasengan <project-name>
  *
  * or
  *
- * pnpm create rasengan-app <project-name>
+ * pnpm create rasengan <project-name>
  */
 
 import chalk from "chalk";
@@ -34,6 +34,7 @@ import {
   Languages,
   StateManagers,
   Templates,
+  Tools,
   Versions,
 } from "./constants/index.js";
 import __dirname from "./utils/dirname.js";
@@ -187,6 +188,21 @@ program
 
       templateName = templateAnswer.template;
 
+      // Prepare question about tools
+      let tools = [];
+
+      // Prepare the question for the tools
+      const toolsQuestion = {
+        type: "checkbox",
+        name: "tools",
+        message: "Select the tools:",
+        choices: Tools,
+      };
+
+      const toolsAnswer = await inquirer.prompt([toolsQuestion]);
+
+      tools = toolsAnswer.tools;
+
       // Prepare question for the state manager
       // let stateManager = "";
 
@@ -211,6 +227,8 @@ program
 
       // Starting the spinner for creating the project
       const createSpinner = spinner("Creating project...");
+
+      console.log("\n");
 
       createSpinner.start();
 
@@ -334,7 +352,6 @@ program
 
         await new Promise((resolve) =>
           setTimeout(() => {
-            console.log("\n");
             createSpinner.succeed(chalk.green("Project created successfully!"));
 
             resolve("");

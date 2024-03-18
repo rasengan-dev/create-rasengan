@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "rasengan dev",
     "build": "rasengan build",
-    "prebuild": "rasengan prebuild",
-    "preview": "rasengan start"
+    "prepare": "rasengan prepare",
+    "start": "rasengan start"
   },
   "dependencies": {
     "rasengan": "^1.0.0",

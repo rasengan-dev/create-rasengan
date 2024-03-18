@@ -14,6 +14,11 @@ export const Languages = ["typescript", "javascript"];
 export const StateManagers = ["blank", "gx", "redux"];
 
 /**
+ * Tools list
+ */
+export const Tools = ["eslint", "prettier"];
+
+/**
  * Version list with stable and beta
  */
 export const Versions = {
