@@ -54,11 +54,33 @@ program
   .name(chalk.blue("create-rasengan"))
   .description(`\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`)
   .arguments("[project-name]")
+  .option("--beta, --experimental", "Consider latest beta version of Rasengan")
   .action(async (projectName, options) => {
     // Showing the welcome message
     console.log(
       `\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`
     );
+
+    // Getting the options
+    const { experimental } = options;
+
+    if (experimental) {
+      if (Versions.beta) {
+        console.log(
+          chalk.yellow(
+            "You are using the latest beta version of Rasengan. This version may not be stable.\n"
+          )
+        );
+      } else {
+        console.log(
+          chalk.red(
+            "There is no beta version available for Rasengan at the moment. Please use the stable version.\n"
+          )
+        );
+
+        return;
+      }
+    }
 
     // Getting the current directory
     const currentDirectory = process.cwd();
@@ -131,32 +153,13 @@ program
         throw new Error("Folder exist but empty");
       }
     } catch (err) {
-      // Ask for the version
+      // Getting the version based on the --beta option
       let versionName = "";
 
-      // Check if there is a stable version
-      if (Versions.stable.length > 0) {
-        // Prepare the question for the version
-        const versionQuestion = {
-          type: "list",
-          name: "version",
-          message: "Select a version:",
-          choices: [...Versions.stable, ...Versions.beta],
-        };
-
-        const versionAnswer = await inquirer.prompt([versionQuestion]);
-        versionName = versionAnswer.version;
+      if (experimental) {
+        versionName = Versions.beta;
       } else {
-        // Prepare the question for the version
-        const versionQuestion = {
-          type: "list",
-          name: "version",
-          message: "Select a version:",
-          choices: Versions.beta,
-        };
-
-        const versionAnswer = await inquirer.prompt([versionQuestion]);
-        versionName = versionAnswer.version;
+        versionName = Versions.stable;
       }
 
       // Ask for the language
@@ -189,19 +192,19 @@ program
       templateName = templateAnswer.template;
 
       // Prepare question about tools
-      let tools = [];
+      // let tools = [];
 
-      // Prepare the question for the tools
-      const toolsQuestion = {
-        type: "checkbox",
-        name: "tools",
-        message: "Select the tools:",
-        choices: Tools,
-      };
+      // // Prepare the question for the tools
+      // const toolsQuestion = {
+      //   type: "checkbox",
+      //   name: "tools",
+      //   message: "Select the tools:",
+      //   choices: Tools,
+      // };
 
-      const toolsAnswer = await inquirer.prompt([toolsQuestion]);
+      // const toolsAnswer = await inquirer.prompt([toolsQuestion]);
 
-      tools = toolsAnswer.tools;
+      // tools = toolsAnswer.tools;
 
       // Prepare question for the state manager
       // let stateManager = "";
@@ -326,16 +329,16 @@ program
             path.join(projectPath, "src/styles/index.css")
           );
 
-          // Copying the src/pages/home.page.tsx file or src/pages/home.page.jsx
+          // Copying the src/app/home.page.tsx file or src/app/home.page.jsx
           if (languageName === "typescript") {
             await fs.copyFile(
               path.join(
                 __dirname,
                 "../..",
                 `templates/${templateName}/${languageName}`,
-                "src/pages/home.page.tsx"
+                "src/app/home.page.tsx"
               ),
-              path.join(projectPath, "src/pages/home.page.tsx")
+              path.join(projectPath, "src/app/home.page.tsx")
             );
           } else {
             await fs.copyFile(
@@ -343,9 +346,9 @@ program
                 __dirname,
                 "../..",
                 `templates/${templateName}/${languageName}`,
-                "src/pages/home.page.jsx"
+                "src/app/home.page.jsx"
               ),
-              path.join(projectPath, "src/pages/home.page.jsx")
+              path.join(projectPath, "src/app/home.page.jsx")
             );
           }
         }

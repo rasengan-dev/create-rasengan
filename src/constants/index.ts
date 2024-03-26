@@ -22,11 +22,6 @@ export const Tools = ["eslint", "prettier"];
  * Version list with stable and beta
  */
 export const Versions = {
-  stable: [
-    // "latest",
-    // "^1.0.0",
-  ],
-  beta: [
-    "1.0.0-beta.5",
-  ],
+  stable: "1.0.0",
+  beta: "1.0.0-beta.7",
 };
