@@ -1,11 +1,11 @@
 import { RouterComponent, defineRouter } from "rasengan";
-import Home from "@pages/home.page";
-import AppLayout from "@pages/app.layout";
+import Home from "@app/home.page";
+import AppLayout from "@app/app.layout";
 
 class AppRouter extends RouterComponent {}
 
 export default defineRouter({
   imports: [],
   layout: AppLayout,
-  pages: [Home]
+  pages: [Home],
 })(AppRouter);

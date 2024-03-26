@@ -8,8 +8,8 @@ export default defineConfig({
     resolve: {
       alias: [
         {
-          find: "@pages",
-          replacement: "src/pages",
+          find: "@app",
+          replacement: "src/app",
         },
         {
           find: "@components",

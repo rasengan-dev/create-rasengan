@@ -18,7 +18,7 @@ class Home extends PageComponent {
             Welcome to <span>Rasengan</span>
           </h1>
           <p className="subtitle">
-            To get started, edit the file <code>src/pages/home.page.tsx</code>
+            To get started, edit the file <code>src/app/home.page.tsx</code>
           </p>
         </div>
 

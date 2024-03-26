@@ -1,4 +1,4 @@
-import { defineConfig } from 'rasengan';
+import { defineConfig } from "rasengan";
 
 export default defineConfig({
   reactStrictMode: true,
@@ -8,22 +8,22 @@ export default defineConfig({
     resolve: {
       alias: [
         {
-          find: "@pages",
-          replacement: "src/pages"
+          find: "@app",
+          replacement: "src/app",
         },
         {
           find: "@components",
-          replacement: "src/components"
+          replacement: "src/components",
         },
         {
           find: "@assets",
-          replacement: "src/assets"
+          replacement: "src/assets",
         },
         {
           find: "@styles",
-          replacement: "src/styles"
-        }
-      ]
-    }
-  }
+          replacement: "src/styles",
+        },
+      ],
+    },
+  },
 });

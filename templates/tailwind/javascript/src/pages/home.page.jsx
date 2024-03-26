@@ -20,7 +20,7 @@ class Home extends PageComponent {
           <p className="text-lg mt-4">
             To get started, edit the file{" "}
             <code className="text-sm ml-2 font-medium">
-              src/pages/home.page.jsx
+              src/app/home.page.jsx
             </code>
           </p>
         </div>
