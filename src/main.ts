@@ -68,7 +68,7 @@ program
       if (Versions.beta) {
         console.log(
           chalk.yellow(
-            "You are using the latest beta version of Rasengan. This version may not be stable.\n"
+            "You are using the latest beta version of Rasengan.js. This version may not be stable.\n"
           )
         );
       } else {
@@ -79,6 +79,14 @@ program
         );
 
         return;
+      }
+    } else {
+      if (!Versions.stable) {
+        console.log(
+          chalk.yellow(
+            "Rasengan.js is only accessible in beta version actually, we are working to improve stability. \n"
+          )
+        );
       }
     }
 
@@ -159,7 +167,7 @@ program
       if (experimental) {
         versionName = Versions.beta;
       } else {
-        versionName = Versions.stable;
+        versionName = Versions.stable || Versions.beta;
       }
 
       // Ask for the language

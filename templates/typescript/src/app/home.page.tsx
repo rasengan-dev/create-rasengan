@@ -1,4 +1,6 @@
 import { PageComponent, defineRoutePage, Link } from "rasengan";
+import logo from "@assets/logo.svg";
+import Image from "@rasenganjs/image";
 
 class Home extends PageComponent {
   render() {
@@ -8,7 +10,12 @@ class Home extends PageComponent {
           <div>
             <span>Powered by</span>
             <Link to="https://rasengan.dev" target="_blank">
-              <span className="logo-text">Rasengan</span>
+              <Image 
+                src={logo}
+                alt="Rasengan logo"
+                width={120}
+                height={40}
+              />
             </Link>
           </div>
         </header>

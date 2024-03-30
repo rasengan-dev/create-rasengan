@@ -1,14 +1,21 @@
 import { PageComponent, defineRoutePage, Link } from "rasengan";
+import logo from "@assets/logo.svg";
+import Image from "@rasenganjs/image";
 
 class Home extends PageComponent {
   render() {
     return (
       <section className="w-full h-full bg-white flex flex-col items-center py-8 px-[20px] md:px-[50px] xl:px-[200px] font-comfortaa">
         <header className="flex justify-end items-center w-full">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             <span>Powered by</span>
             <Link to="https://rasengan.dev" target="_blank">
-              <span className="text-primary font-urbanist">Rasengan</span>
+              <Image 
+                src={logo}
+                alt="Rasengan logo"
+                width={120}
+                height={40}
+              />
             </Link>
           </div>
         </header>
