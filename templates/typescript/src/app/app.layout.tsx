@@ -1,16 +1,14 @@
 import React from "react";
-import { LayoutComponent, Outlet, defineRouteLayout } from "rasengan";
+import { Outlet, LayoutComponent } from "rasengan";
 
-class AppLayout extends LayoutComponent {
-  render() {
-    return (
-      <React.Fragment>
-        <Outlet />
-      </React.Fragment>
-    );
-  }
-}
+const AppLayout: LayoutComponent = () => {
+  return (
+    <React.Fragment>
+      <Outlet />
+    </React.Fragment>
+  );
+};
 
-export default defineRouteLayout({
-  path: "/",
-})(AppLayout);
+AppLayout.path = "/";
+
+export default AppLayout;

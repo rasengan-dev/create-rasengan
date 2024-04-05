@@ -55,6 +55,7 @@ program
   .description(`\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`)
   .arguments("[project-name]")
   .option("--beta, --experimental", "Consider latest beta version of Rasengan")
+  .option("-y, --yes", "Skip the questions and use the default values")
   .action(async (projectName, options) => {
     // Showing the welcome message
     console.log(
@@ -62,7 +63,7 @@ program
     );
 
     // Getting the options
-    const { experimental } = options;
+    const { experimental, yes: skip } = options;
 
     if (experimental) {
       if (Versions.beta) {
@@ -173,61 +174,77 @@ program
       // Ask for the language
       let languageName = "";
 
-      // Prepare the question for the language
-      const languageQuestion = {
-        type: "list",
-        name: "language",
-        message: "Select a language:",
-        choices: Languages,
-      };
-
-      const languageAnswer = await inquirer.prompt([languageQuestion]);
-      languageName = languageAnswer.language;
-
       // Get the template name
       let templateName = "";
-
-      // Prepare the question for the template
-      const templateQuestion = {
-        type: "list",
-        name: "template",
-        message: "Select a template:",
-        choices: Templates,
-      };
-
-      const templateAnswer = await inquirer.prompt([templateQuestion]);
-
-      templateName = templateAnswer.template;
 
       // Prepare question about tools
       // let tools = [];
 
-      // // Prepare the question for the tools
-      // const toolsQuestion = {
-      //   type: "checkbox",
-      //   name: "tools",
-      //   message: "Select the tools:",
-      //   choices: Tools,
-      // };
-
-      // const toolsAnswer = await inquirer.prompt([toolsQuestion]);
-
-      // tools = toolsAnswer.tools;
-
       // Prepare question for the state manager
       // let stateManager = "";
 
-      // // Prepare the question for the state manager
-      // const stateManagerQuestion = {
-      //   type: "list",
-      //   name: "stateManager",
-      //   message: "Select a state manager:",
-      //   choices: StateManagers,
-      // };
+      if (!skip) {
+        // Prepare the question for the language
+        const languageQuestion = {
+          type: "list",
+          name: "language",
+          message: "Select a language:",
+          choices: Languages,
+        };
+  
+        const languageAnswer = await inquirer.prompt([languageQuestion]);
+        languageName = languageAnswer.language;
+        
+  
+        // Prepare the question for the template
+        const templateQuestion = {
+          type: "list",
+          name: "template",
+          message: "Select a template:",
+          choices: Templates,
+        };
+  
+        const templateAnswer = await inquirer.prompt([templateQuestion]);
+  
+        templateName = templateAnswer.template;
+  
+  
+        // // Prepare the question for the tools
+        // const toolsQuestion = {
+        //   type: "checkbox",
+        //   name: "tools",
+        //   message: "Select the tools:",
+        //   choices: Tools,
+        // };
+  
+        // const toolsAnswer = await inquirer.prompt([toolsQuestion]);
+  
+        // tools = toolsAnswer.tools;
+  
+  
+        // // Prepare the question for the state manager
+        // const stateManagerQuestion = {
+        //   type: "list",
+        //   name: "stateManager",
+        //   message: "Select a state manager:",
+        //   choices: StateManagers,
+        // };
+  
+        // const stateManagerAnswer = await inquirer.prompt([stateManagerQuestion]);
+  
+        // stateManager = stateManagerAnswer.stateManager;
+      } else {
+        languageName = "typescript";
+        templateName = "blank";
 
-      // const stateManagerAnswer = await inquirer.prompt([stateManagerQuestion]);
+        // Display the selected values
+        console.log("");
+        console.log(chalk.bold.blue("Default values:"));
+        console.log("");
 
-      // stateManager = stateManagerAnswer.stateManager;
+        console.log(`Language: ${chalk.blue(languageName)}`);
+        console.log(`Template: ${chalk.blue(templateName)}`);
+      }
 
       // Handling all answers
       const templatePath = path.join(
