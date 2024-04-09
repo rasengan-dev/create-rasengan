@@ -1,7 +1,6 @@
-import { PageComponent, defineRoutePage, Link } from "rasengan";
+import { PageComponent, Link } from "rasengan";
 import logo from "@assets/logo.svg";
 import Image from "@rasenganjs/image";
-import Home from "../../../../../../projects/indira/src/app/home.page";
 
 const Home: PageComponent = () => {
   return (

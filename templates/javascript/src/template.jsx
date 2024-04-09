@@ -2,6 +2,7 @@ export default function Template({
   children,
   Head,
   Body,
+  Script
 }) {
   return (
     <html lang="en">
@@ -13,6 +14,8 @@ export default function Template({
 
       <Body>
         {children}
+
+        <Script />
       </Body>
     </html>
   );
