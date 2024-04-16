@@ -2,7 +2,7 @@ import { adaptPath } from "rasengan";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: adaptPath(["./index.html", "./src/**/*.{js,jsx}"]),
+  content: adaptPath(["./src/**/*.{js,jsx}"]),
   theme: {
     extend: {
       colors: {

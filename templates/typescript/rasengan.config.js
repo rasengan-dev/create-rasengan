@@ -9,19 +9,19 @@ export default defineConfig({
       alias: [
         {
           find: "@app",
-          replacement: "src/app",
+          replacement: "./src/app",
         },
         {
           find: "@components",
-          replacement: "src/components",
+          replacement: "./src/components",
         },
         {
           find: "@assets",
-          replacement: "src/assets",
+          replacement: "./src/assets",
         },
         {
           find: "@styles",
-          replacement: "src/styles",
+          replacement: "./src/styles",
         },
       ],
     },

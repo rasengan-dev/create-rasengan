@@ -2,10 +2,6 @@ import { PageComponent, Link } from "rasengan";
 import logo from "@assets/logo.svg";
 import Image from "@rasenganjs/image";
 
-import { PageComponent, Link } from "rasengan";
-import logo from "@assets/logo.svg";
-import Image from "@rasenganjs/image";
-
 const Home: PageComponent = () => {
   return (
     <section className="main">

@@ -1,6 +1,6 @@
 {
   "name": "create-rasengan",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.11",
   "main": "/dist/main.js",
   "type": "module",
   "author": {
@@ -20,7 +20,8 @@
     "create-rasengan": "./dist/main.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build:clean": "rm -rf ./dist",
+    "build": "npm run build:clean && tsc",
     "deploy": "npm publish --access public",
     "deploy:beta": "npm run deploy --tag beta",
     "pack": "npm pack --pack-destination ./../packages/create-rasengan/"
