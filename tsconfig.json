@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2015",
     "module": "ESNext",
     "outDir": "dist",
@@ -9,7 +10,8 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "declaration": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "templates"]
