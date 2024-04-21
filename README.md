@@ -1,7 +1,7 @@
 # Create Rasengan
 
 [![npm version](https://badge.fury.io/js/create-rasengan.svg)](https://badge.fury.io/js/create-rasengan)
-[![npm downloads](https://img.shields.io/npm/dm/rasengan)](https://www.npmjs.com/package/create-rasengan)
+[![npm downloads](https://img.shields.io/npm/dm/create-rasengan)](https://www.npmjs.com/package/create-rasengan)
 [![GitHub license](https://img.shields.io/github/license/rasengan-dev/rasenganjs)](https://github.com/rasengan-dev/create-rasengan/blob/main/LICENSE)
 
 The easiest way to create a new Rasengan.js project is to use the `create-rasengan` package. It will set up a new Rasengan.js project with a single command.
