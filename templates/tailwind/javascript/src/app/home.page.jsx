@@ -8,7 +8,7 @@ const Home = () => {
       <header className="flex justify-end items-center w-full">
         <div className="flex items-center">
           <span>Powered by</span>
-          <Link to="https://rasengan.dev" target="_blank">
+          <Link to="https://beta.rasengan.dev" target="_blank">
             <Image src={logo} alt="Rasengan logo" width={120} height={40} />
           </Link>
         </div>
@@ -33,7 +33,7 @@ const Home = () => {
             Find in-depth information about Rasengan features and API.
           </p>
           <a
-            href="https://rasengan.dev/docs"
+            href="https://beta.rasengan.dev/docs"
             target="_blank"
             className="mt-4 text-primary font-bold"
           >
@@ -47,7 +47,7 @@ const Home = () => {
             Learn about Rasengan in an interactive course with quizzes!
           </p>
           <a
-            href="https://rasengan.dev/learn"
+            href="https://beta.rasengan.dev/learn"
             target="_blank"
             className="mt-4 text-primary font-bold"
           >
@@ -61,7 +61,7 @@ const Home = () => {
             Discover and deploy boilerplate example Rasengan projects.
           </p>
           <a
-            href="https://rasengan.dev/examples"
+            href="https://github.com/rasengan-dev/rasenganjs-examples"
             target="_blank"
             className="mt-4 text-primary font-bold"
           >
@@ -72,14 +72,14 @@ const Home = () => {
         <div className="flex flex-col p-4 rounded-md border-[1px] border-[EFEFEF] max-w-[500px] md:w-[300px] lg:w-[400px]">
           <h2 className="text-xl font-urbanist">Community</h2>
           <p className="mt-2">
-            Join an active community of Rasengan users on Discord.
+            Join an active community of Rasengan users on GitHub.
           </p>
           <a
-            href="https://rasengan.dev/discord"
+            href="https://github.com/rasengan-dev/rasenganjs/discussions"
             target="_blank"
             className="mt-4 text-primary font-bold"
           >
-            Join Discord
+            Join Github Discussions
           </a>
         </div>
       </div>
