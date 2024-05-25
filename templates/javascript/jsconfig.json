@@ -4,11 +4,7 @@
 
     /* Aliases for intellisence in javascript env */
     "paths": {
-      "@/*": ["src/*"],
-      "@app/*": ["src/app/*"],
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@styles/*": ["src/styles/*"]
+      "@/*": ["src/*"]
     }
   }
 }

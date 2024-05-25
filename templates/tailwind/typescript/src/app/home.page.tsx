@@ -1,5 +1,5 @@
 import { PageComponent, Link } from "rasengan";
-import logo from "@assets/logo.svg";
+import logo from "@/assets/logo.svg";
 import Image from "@rasenganjs/image";
 
 const Home: PageComponent = () => {
