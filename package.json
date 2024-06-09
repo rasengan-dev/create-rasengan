@@ -33,7 +33,9 @@
     "commander": "^11.1.0",
     "inquirer": "^9.2.11",
     "ncp": "^2.0.0",
-    "ora": "^7.0.1"
+    "ora": "^7.0.1",
+    "rimraf": "^5.0.7",
+    "simple-git": "^3.24.0"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.4",

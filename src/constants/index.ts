@@ -28,3 +28,10 @@ export const Versions: {
   stable: null,
   beta: "1.0.0-beta.14",
 };
+
+/**
+ * Template github url
+ * @type {string}
+ */
+export const TEMPLATE_GITHUB_URL: string = "https://github.com/rasengan-dev/create-rasengan.git";
+// export const TEMPLATE_GITHUB_URL: string = "https://github.com/rasengan-dev/rasenganjs-examples.git";

@@ -24,6 +24,7 @@
  * pnpm create rasengan <project-name>
  */
 
+import { simpleGit, SimpleGit, SimpleGitOptions } from "simple-git";
 import chalk from "chalk";
 import { Command } from "commander";
 import ora from "ora";
@@ -39,6 +40,8 @@ import {
 } from "./constants/index.js";
 import __dirname from "./utils/dirname.js";
 import inquirer from "inquirer";
+import { logInfo } from "./scripts/log-info.js";
+import createProjectFromTemplate from "./scripts/template.js";
 
 // Spinner
 const spinner = (text: string) =>
@@ -56,6 +59,7 @@ program
   .arguments("[project-name]")
   .option("--beta, --experimental", "Consider latest beta version of Rasengan")
   .option("-y, --yes", "Skip the questions and use the default values")
+  .option("--template <template-name>", "Choose a template")
   .action(async (projectName, options) => {
     // Showing the welcome message
     console.log(
@@ -63,7 +67,7 @@ program
     );
 
     // Getting the options
-    const { experimental, yes: skip } = options;
+    const { experimental, yes: skip, template } = options;
 
     if (experimental) {
       if (Versions.beta) {
@@ -113,6 +117,13 @@ program
     if (nameOfProject === ".") {
       nameOfProject = "";
     } else {
+      if (nameOfProject.includes(" ")) {
+        console.error(
+          chalk.red("Project name can't include spaces. Please use dashes.")
+        );
+        return;
+      }
+      
       if (!/^[a-z0-9_-]*$/i.test(nameOfProject)) {
         console.error(
           chalk.red(
@@ -125,13 +136,6 @@ program
       if (nameOfProject !== nameOfProject.toLowerCase()) {
         console.error(
           chalk.red("Project name can only be in lowercase letters.")
-        );
-        return;
-      }
-
-      if (nameOfProject.includes(" ")) {
-        console.error(
-          chalk.red("Project name can't include spaces. Please use dashes.")
         );
         return;
       }
@@ -162,6 +166,15 @@ program
         throw new Error("Folder exist but empty");
       }
     } catch (err) {
+      // Check if the developer need to use a template from github or not
+      if (template) {
+        await createProjectFromTemplate(nameOfProject, template, {
+          currentDirectory: nameOfProject === "" ? true : false,
+        });
+
+        return;
+      }
+
       // Getting the version based on the --beta option
       let versionName = "";
 
@@ -378,6 +391,21 @@ program
           }
         }
 
+        // Initialization of git repository
+        const options: Partial<SimpleGitOptions> = {
+          baseDir: projectPath,
+          binary: 'git',
+          maxConcurrentProcesses: 6,
+          trimmed: false,
+        };
+
+        const git = simpleGit(options);
+
+        await git
+          .init()
+          .add("-A")
+          .commit("Initial commit");
+
         await new Promise((resolve) =>
           setTimeout(() => {
             createSpinner.succeed(chalk.green("Project created successfully!"));
@@ -387,48 +415,8 @@ program
         );
         console.log("");
 
-        // Display the next steps
-        console.log(chalk.bold.blue("Next steps:"));
-
-        console.log("");
-
-        // Display the next steps
-        if (nameOfProject) {
-          console.log(`1. ${chalk.blue(`cd ${nameOfProject}`)}`);
-          console.log(
-            `2. ${chalk.blue("npm install")} or ${chalk.blue(
-              "yarn"
-            )} or ${chalk.blue("pnpm install")}`
-          );
-          console.log(
-            `3. ${chalk.blue("npm run dev")} or ${chalk.blue(
-              "yarn dev"
-            )} or ${chalk.blue("pnpm run dev")}`
-          );
-        } else {
-          console.log(
-            `1. ${chalk.blue("npm install")} or ${chalk.blue(
-              "yarn"
-            )} or ${chalk.blue("pnpm install")}`
-          );
-          console.log(
-            `2. ${chalk.blue("npm run dev")} or ${chalk.blue(
-              "yarn dev"
-            )} or ${chalk.blue("pnpm run dev")}`
-          );
-        }
-
-        console.log("");
-
-        // Congratulation message
-        console.log(`${chalk.bold.blue("Congratulation !")} 🎉`);
-
-        console.log("");
-        console.log(
-          `For more information, visit ${chalk.blue(
-            "https://rasengan.dev/docs"
-          )}`
-        );
+        // Logging next steps
+        logInfo(nameOfProject);
       });
     }
   });
