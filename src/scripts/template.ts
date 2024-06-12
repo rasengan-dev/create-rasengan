@@ -115,6 +115,10 @@ export default async function createProjectFromTemplate(
     });
   } catch (error) {
     console.log(error);
+
+    // delete the temporary folder
+    rimraf.sync(tmpFolder);
+    
     return;
   }
 }

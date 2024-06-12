@@ -33,5 +33,4 @@ export const Versions: {
  * Template github url
  * @type {string}
  */
-export const TEMPLATE_GITHUB_URL: string = "https://github.com/rasengan-dev/create-rasengan.git";
-// export const TEMPLATE_GITHUB_URL: string = "https://github.com/rasengan-dev/rasenganjs-examples.git";
+export const TEMPLATE_GITHUB_URL: string = "https://github.com/rasengan-dev/rasenganjs-examples.git";
