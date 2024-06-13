@@ -61,9 +61,18 @@ program
   .option("-y, --yes", "Skip the questions and use the default values")
   .option("--template <template-name>", "Choose a template")
   .action(async (projectName, options) => {
+    // Read the package.json file
+    const packageJson = await fs.readFile(
+      path.join(__dirname, "../../package.json"),
+      "utf-8"
+    );
+
+    // Parse the package.json file
+    const parsedPackageJson = JSON.parse(packageJson);
+
     // Showing the welcome message
     console.log(
-      `\nYou are using ${chalk.bold.blue("Create Rasengan CLI")} 🎉\n`
+      `\nYou are using ${chalk.bold.blue(`Create Rasengan CLI v${parsedPackageJson.version}`)} 🎉\n`
     );
 
     // Getting the options
@@ -154,14 +163,8 @@ program
 
       if (dir.length > 0) {
         // Returning if the project already exists
-        console.log(
-          `
-            The folder with the name ${chalk.bold.blue(
-              projectName
-            )} is not empty!\n
-            Try using a different project name or delete the existing project.
-          `
-        );
+        console.log(chalk.red(`\n❌ The folder with the name ${chalk.bold.blue(`"${projectName}"`)} is not empty!\n`));
+        console.log(chalk.white(`💡 Please use another name or delete the existing folder!\n`));
       } else {
         throw new Error("Folder exist but empty");
       }
@@ -401,10 +404,10 @@ program
 
         const git = simpleGit(options);
 
-        await git
-          .init()
-          .add("-A")
-          .commit("Initial commit");
+        // Initializing the git repository
+        await git.init();
+        await git.add("-A");
+        await git.commit("Initial commit");
 
         await new Promise((resolve) =>
           setTimeout(() => {

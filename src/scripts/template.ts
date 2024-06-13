@@ -34,7 +34,7 @@ export default async function createProjectFromTemplate(
 
     // Initialize the git client
     const options: Partial<SimpleGitOptions> = {
-      baseDir: tmpFolder,
+      baseDir: projectPath,
       binary: 'git',
       maxConcurrentProcesses: 6,
       trimmed: false,
@@ -49,7 +49,7 @@ export default async function createProjectFromTemplate(
     createSpinner.start();
 
     // Clone the template repository
-    await git.clone(TEMPLATE_GITHUB_URL, ".");
+    await git.clone(TEMPLATE_GITHUB_URL, ".tmp");
 
     const srcFolder = path.join(tmpFolder, `templates/${templateName}`);
 
@@ -60,7 +60,7 @@ export default async function createProjectFromTemplate(
       createSpinner.fail(chalk.red("Template name not found!"));
 
       // delete the temporary folder
-      rimraf.sync(tmpFolder);
+      rimraf.sync(projectPath);
 
       return;
     }
@@ -72,7 +72,7 @@ export default async function createProjectFromTemplate(
         console.log("");
 
         // delete the temporary folder
-        rimraf.sync(tmpFolder);
+        rimraf.sync(projectPath);
 
         return;
       }
@@ -93,16 +93,13 @@ export default async function createProjectFromTemplate(
         JSON.stringify(packageJson, null, 2)
       );
 
-      // Initializing the git repository
-      await git
-          .init()
-          .add("-A")
-          .commit("Initial commit");
-      
       // Removing the temporary folder
       rimraf.sync(tmpFolder);
 
-      console.log("");
+      // Initializing the git repository
+      await git.init();
+      await git.add("-A");
+      await git.commit("Initial commit");
 
       createSpinner.succeed(chalk.green("Project created successfully!"));
 
@@ -117,7 +114,7 @@ export default async function createProjectFromTemplate(
     console.log(error);
 
     // delete the temporary folder
-    rimraf.sync(tmpFolder);
+    rimraf.sync(projectPath);
     
     return;
   }
