@@ -59,7 +59,7 @@ program
   .arguments("[project-name]")
   .option("--beta, --experimental", "Consider latest beta version of Rasengan")
   .option("-y, --yes", "Skip the questions and use the default values")
-  .option("--template <template-name>", "Choose a template")
+  // .option("--template <template-name>", "Choose a template")
   .action(async (projectName, options) => {
     // Read the package.json file
     const packageJson = await fs.readFile(
@@ -170,13 +170,13 @@ program
       }
     } catch (err) {
       // Check if the developer need to use a template from github or not
-      if (template) {
-        await createProjectFromTemplate(nameOfProject, template, {
-          currentDirectory: nameOfProject === "" ? true : false,
-        });
+      // if (template) {
+      //   await createProjectFromTemplate(nameOfProject, template, {
+      //     currentDirectory: nameOfProject === "" ? true : false,
+      //   });
 
-        return;
-      }
+      //   return;
+      // }
 
       // Getting the version based on the --beta option
       let versionName = "";
