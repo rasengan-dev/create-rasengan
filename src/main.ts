@@ -59,6 +59,7 @@ program
   .arguments("[project-name]")
   .option("--beta, --experimental", "Consider latest beta version of Rasengan")
   .option("-y, --yes", "Skip the questions and use the default values")
+  .option("--git", "Initialize a git repository")
   // .option("--template <template-name>", "Choose a template")
   .action(async (projectName, options) => {
     // Read the package.json file
@@ -76,7 +77,7 @@ program
     );
 
     // Getting the options
-    const { experimental, yes: skip, template } = options;
+    const { experimental, yes: skip, template, git: initGit } = options;
 
     if (experimental) {
       if (Versions.beta) {
@@ -394,20 +395,23 @@ program
           }
         }
 
-        // Initialization of git repository
-        const options: Partial<SimpleGitOptions> = {
-          baseDir: projectPath,
-          binary: 'git',
-          maxConcurrentProcesses: 6,
-          trimmed: false,
-        };
+        if (initGit) {
+          // Initialization of git repository
+          const options: Partial<SimpleGitOptions> = {
+            baseDir: projectPath,
+            binary: 'git',
+            maxConcurrentProcesses: 6,
+            trimmed: false,
+          };
+  
+          const git = simpleGit(options);
+  
+          // Initializing the git repository
+          await git.init();
+          await git.add("-A");
+          await git.commit("Initial commit");
+        }
 
-        const git = simpleGit(options);
-
-        // Initializing the git repository
-        await git.init();
-        await git.add("-A");
-        await git.commit("Initial commit");
 
         await new Promise((resolve) =>
           setTimeout(() => {
